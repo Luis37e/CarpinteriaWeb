@@ -63,6 +63,8 @@ if (form) {
 
         const name = document.getElementById("name").value.trim();
         const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const message = document.getElementById("message").value.trim();
 
         if (name === "" || email === "") {
             alert("Por favor complete los campos Nombre y Correo.");
@@ -76,7 +78,17 @@ if (form) {
             return;
         }
 
-        alert("Mensaje enviado correctamente. Nos pondremos en contacto con usted.");
+        const subject = encodeURIComponent("Solicitud de cotizacion - Carpinteria Calero");
+        const body = encodeURIComponent(
+            `Nombre: ${name}\n` +
+            `Correo: ${email}\n` +
+            `Telefono: ${phone || "No indicado"}\n\n` +
+            `Mensaje:\n${message || "No indicado"}`
+        );
+
+        window.location.href = `mailto:carpinteriacalero26@gmail.com?subject=${subject}&body=${body}`;
+
+        alert("Se abrira tu correo para enviar la solicitud a Carpinteria Calero.");
         form.reset();
     });
 }
